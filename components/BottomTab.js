@@ -69,41 +69,11 @@ function ProfileStackScreen() {
 
 const Tab = createBottomTabNavigator()
 
-const createIcon = (icon, iconS, c, s) => {
-    return React.createElement(focused ? iconS : icon, { color: c, size: s });
-}
-
-const setIcon = (title, focused, c, s) => {
-    console.log("focused:", focused)
-    console.log("rout:", title)
-    let iconName = React.createElement(focused ? Home : icon, { color: c, size: s });
-    switch (title) {
-        case Constants.Tab.First.Title:
-            iconName = createIcon(HomeIcon, HomeIconS, c, s)
-            break;
-        case Constants.Tab.Second.Title:
-            iconName = createIcon(HomeIcon, HomeIconS, c, s)
-            break;
-        case Constants.Tab.Third.Title:
-            iconName = createIcon(HomeIcon, HomeIconS, c, s)
-            break;
-        case Constants.Tab.Fourth.Title:
-            iconName = createIcon(HomeIcon, HomeIconS, c, s)
-            break;
-        case Constants.Tab.Fiveth.Title:
-            iconName = createIcon(HomeIcon, HomeIconS, c, s)
-            break;
-        default:
-            break;
-    }
-    return iconName
-}
-
 const screenOptions = ({ route }) => ({
     headerShown: false,
     tabBarShowLabel: false,
     tabBarStyle: {
-        backgroundColor: "#fafafa",
+        backgroundColor: "tomato",
         borderRadius: 25,
         position: 'absolute',
         borderTopWidth: 0,
@@ -116,35 +86,12 @@ const screenOptions = ({ route }) => ({
 
 const BottomTab = () => {
     return (
-        <Tab.Navigator initialRouteName={Constants.Tab.Third.Title} screenOptions={screenOptions}>
-            <Tab.Screen options={{
-                tabBarIcon: ({ focused, color, size }) => (
-                    React.createElement(focused ? HomeIconS : HomeIcon, { color: color, size: size })
-                )
-            }} name={Constants.Tab.First.Title} component={HomeStackScreens} />
-            <Tab.Screen options={{
-                tabBarIcon: ({ focused, color, size }) => (
-                    React.createElement(focused ? HeartIconS : HeartIcon, { color: color, size: size })
-                )
-            }} name={Constants.Tab.Second.Title} component={FavouriteStackScreens} />
-            <Tab.Screen options={{
-                tabBarIcon: ({ focused, color, size }) => (
-                    React.createElement(focused ? ViewListIconS : ViewListIcon, { color: focused ? Constants.Color.ww : color, size: size })
-                ),
-                tabBarButton: (props) => (
-                    <BottomBarButton {...props} />
-                )
-            }} name={Constants.Tab.Third.Title} component={ProductStackScreen} />
-            <Tab.Screen options={{
-                tabBarIcon: ({ focused, color, size }) => (
-                    React.createElement(focused ? ShoppingBagIconS : ShoppingBagIcon, { color: color, size: size })
-                )
-            }} name={Constants.Tab.Fourth.Title} component={BasketStackScreen} />
-            <Tab.Screen options={{
-                tabBarIcon: ({ focused, color, size }) => (
-                    React.createElement(focused ? UserIconS : UserIcon, { color: color, size: size })
-                )
-            }} name={Constants.Tab.Fiveth.Title} component={ProfileStackScreen} />
+        <Tab.Navigator initialRouteName={Constants.Tab.Third.Title} screenOptions={screenOptions} tabBar={props => <Tabbar {...props} />}>
+            <Tab.Screen name={Constants.Tab.First.Title} component={HomeStackScreens} />
+            <Tab.Screen name={Constants.Tab.Second.Title} component={FavouriteStackScreens} />
+            <Tab.Screen name={Constants.Tab.Third.Title} component={ProductStackScreen} />
+            <Tab.Screen name={Constants.Tab.Fourth.Title} component={BasketStackScreen} />
+            <Tab.Screen name={Constants.Tab.Fiveth.Title} component={ProfileStackScreen} />
         </Tab.Navigator>
     )
 }
